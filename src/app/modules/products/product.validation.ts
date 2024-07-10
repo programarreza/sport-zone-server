@@ -11,6 +11,7 @@ const createProductValidationSchema = z.object({
     description: z.string(),
     price: z.number(),
     image: z.string(),
+    isDeleted: z.boolean().optional(),
   }),
 });
 

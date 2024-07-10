@@ -3,6 +3,7 @@ import {
   createProduct,
   getALlProducts,
   getSingleProductById,
+  productDelete,
   productUpdate,
 } from "./product.controller";
 import validateRequest from "../../middleware/validateRequest";
@@ -26,5 +27,7 @@ productRoutes.patch(
   validateRequest(updateProductValidationSchema),
   productUpdate
 );
+
+productRoutes.delete("/:id", productDelete)
 
 export default productRoutes;

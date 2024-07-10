@@ -5,6 +5,7 @@ import {
   createProductIntoDB,
   getAllProductsFromDB,
   getSingleProductFromDB,
+  ProductDeleteFromDB,
   ProductUpdateIntoDB,
 } from "./product.service";
 
@@ -54,4 +55,22 @@ const productUpdate = catchAsync(async (req, res) => {
   });
 });
 
-export { createProduct, getALlProducts, getSingleProductById, productUpdate };
+const productDelete = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await ProductDeleteFromDB(id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Product is deleted successfully ",
+    data: result,
+  });
+});
+
+export {
+  createProduct,
+  getALlProducts,
+  getSingleProductById,
+  productUpdate,
+  productDelete,
+};
