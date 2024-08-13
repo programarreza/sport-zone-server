@@ -21,7 +21,8 @@ const createProduct = catchAsync(async (req, res) => {
 });
 
 const getALlProducts = catchAsync(async (req, res) => {
-  const result = await getAllProductsFromDB();
+  const name = (req.query.name as string) || "";
+  const result = await getAllProductsFromDB(name);
 
   sendResponse(res, {
     success: true,

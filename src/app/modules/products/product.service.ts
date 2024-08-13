@@ -3,6 +3,10 @@ import AppError from "../../error/AppError";
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
 
+type Query = Partial<{
+  name: { $regex: RegExp };
+}>;
+
 const createProductIntoDB = async (payload: TProduct) => {
   const productExist = await Product.findOne({ name: payload.name });
   if (productExist) {
@@ -13,8 +17,13 @@ const createProductIntoDB = async (payload: TProduct) => {
   return result;
 };
 
-const getAllProductsFromDB = async () => {
-  const result = await Product.find();
+const getAllProductsFromDB = async (name: string) => {
+  const query: Query = {};
+  if (name) {
+    query.name = { $regex: new RegExp(name, "i") };
+  }
+
+  const result = await Product.find(query);
   return result;
 };
 
