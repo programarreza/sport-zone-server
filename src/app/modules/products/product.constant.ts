@@ -1,9 +1,12 @@
 export const Category = [
-  "hiking boots",
-  "basketball",
-  "tennis",
-  "bags & backpacks",
   "football",
+  "basketball",
+  "baseball",
+  "protectiveGear",
+  "surfing",
+  "badminton",
+  "tennis",
+  "helmets",
 ];
 
 export const ProductSearchableFields = ["name"];
