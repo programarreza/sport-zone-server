@@ -5,3 +5,5 @@ export const Category = [
   "bags & backpacks",
   "football",
 ];
+
+export const ProductSearchableFields = ["name"];

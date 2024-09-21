@@ -2,10 +2,12 @@ import httpStatus from "http-status";
 import AppError from "../../error/AppError";
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
+import QueryBuilder from "../../bulder/QueryBuilder";
+import { ProductSearchableFields } from "./product.constant";
 
-type Query = Partial<{
-  name: { $regex: RegExp };
-}>;
+// type Query = Partial<{
+//   name: { $regex: RegExp };
+// }>;
 
 const createProductIntoDB = async (payload: TProduct) => {
   const productExist = await Product.findOne({ name: payload.name });
@@ -17,13 +19,14 @@ const createProductIntoDB = async (payload: TProduct) => {
   return result;
 };
 
-const getAllProductsFromDB = async (name: string) => {
-  const query: Query = {};
-  if (name) {
-    query.name = { $regex: new RegExp(name, "i") };
-  }
+const getAllProductsFromDB = async (query: Record<string, unknown>) => {
+  const productQuery = new QueryBuilder(Product.find(), query)
+    .search(ProductSearchableFields)
+    .filter()
+    .sort()
+    .fields();
 
-  const result = await Product.find(query);
+  const result = await productQuery.modelQuery;
   return result;
 };
 
