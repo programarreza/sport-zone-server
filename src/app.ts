@@ -7,7 +7,13 @@ import categoryRoute from "./app/modules/category/category.route";
 
 // parsers
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+app.use(
+  cors({
+    origin: ["https://sportszoneclient.vercel.app", "http://localhost:5173"],
+    credentials: true,
+  })
+);
 
 // routes
 app.use("/api/v1/products", productRoutes);
