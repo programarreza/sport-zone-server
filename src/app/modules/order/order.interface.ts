@@ -6,6 +6,7 @@ type TCustomerInfo = {
 };
 
 type TProduct = {
+  quantity: any;
   _id: string;
   name: string;
   category: string;
