@@ -1,20 +1,12 @@
 import { model, Schema } from "mongoose";
+import { categoryList } from "./category.constant";
 
 const categorySchema = new Schema(
   {
     categoryName: {
       type: String,
       required: true,
-      enum: [
-        "football",
-        "basketball",
-        "baseball",
-        "protectiveGear",
-        "surfing",
-        "badminton",
-        "tennis",
-        "helmets",
-      ],
+      enum: categoryList,
     },
     image: {
       type: String,

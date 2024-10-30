@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
+import { categoryList } from "../category/category.constant";
 import { TProduct } from "./product.interface";
-import { Category } from "./product.constant";
 
 const productSchema = new Schema<TProduct>(
   {
@@ -12,7 +12,7 @@ const productSchema = new Schema<TProduct>(
     category: {
       type: String,
       enum: {
-        values: Category,
+        values: categoryList,
         message: "{VALUE} in not a valid category",
       },
       required: true,
@@ -27,7 +27,7 @@ const productSchema = new Schema<TProduct>(
     },
     rating: {
       type: Number,
-      default: 0
+      default: 0,
     },
     description: {
       type: String,

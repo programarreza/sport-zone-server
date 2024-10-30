@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { Category } from "./product.constant";
+import { categoryList } from "../category/category.constant";
 
 const createProductValidationSchema = z.object({
   body: z.object({
     name: z.string(),
-    category: z.enum([...Category] as [string, ...string[]]),
+    category: z.enum([...categoryList] as [string, ...string[]]),
     stockQuantity: z.number().optional(),
     brand: z.string(),
     rating: z.number().optional(),
@@ -18,7 +18,7 @@ const createProductValidationSchema = z.object({
 const updateProductValidationSchema = z.object({
   body: z.object({
     name: z.string().optional(),
-    category: z.enum([...Category] as [string, ...string[]]).optional(),
+    category: z.enum([...categoryList] as [string, ...string[]]).optional(),
     stockQuantity: z.number().optional(),
     brand: z.string().optional(),
     rating: z.number().optional(),
