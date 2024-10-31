@@ -10,7 +10,6 @@ const createProductValidationSchema = z.object({
     rating: z.number().optional(),
     description: z.string(),
     price: z.number().optional(),
-    image: z.string(),
     isDeleted: z.boolean().optional(),
   }),
 });
@@ -24,7 +23,6 @@ const updateProductValidationSchema = z.object({
     rating: z.number().optional(),
     description: z.string().optional(),
     price: z.number().optional(),
-    image: z.string().optional(),
     isDeleted: z.boolean().optional(),
   }),
 });

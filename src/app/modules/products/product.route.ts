@@ -1,4 +1,6 @@
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
+import { multerUpload } from "../../config/multer.config";
+import validateRequest from "../../middleware/validateRequest";
 import {
   createProduct,
   getALlProducts,
@@ -6,7 +8,6 @@ import {
   productDelete,
   productUpdate,
 } from "./product.controller";
-import validateRequest from "../../middleware/validateRequest";
 import {
   createProductValidationSchema,
   updateProductValidationSchema,
@@ -16,6 +17,11 @@ const productRoutes = Router();
 
 productRoutes.post(
   "/create-product",
+  multerUpload.single("image"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next();
+  },
   validateRequest(createProductValidationSchema),
   createProduct
 );
@@ -28,6 +34,6 @@ productRoutes.patch(
   productUpdate
 );
 
-productRoutes.delete("/:id", productDelete)
+productRoutes.delete("/:id", productDelete);
 
 export default productRoutes;

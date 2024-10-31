@@ -10,7 +10,10 @@ import {
 } from "./product.service";
 
 const createProduct = catchAsync(async (req, res) => {
-  const result = await createProductIntoDB(req.body);
+  const result = await createProductIntoDB({
+    ...req.body,
+    image: req.file?.path,
+  });
 
   sendResponse(res, {
     success: true,
@@ -71,6 +74,6 @@ export {
   createProduct,
   getALlProducts,
   getSingleProductById,
-  productUpdate,
   productDelete,
+  productUpdate,
 };

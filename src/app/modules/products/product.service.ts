@@ -1,13 +1,9 @@
 import httpStatus from "http-status";
+import QueryBuilder from "../../bulder/QueryBuilder";
 import AppError from "../../error/AppError";
+import { ProductSearchableFields } from "./product.constant";
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
-import QueryBuilder from "../../bulder/QueryBuilder";
-import { ProductSearchableFields } from "./product.constant";
-
-// type Query = Partial<{
-//   name: { $regex: RegExp };
-// }>;
 
 const createProductIntoDB = async (payload: TProduct) => {
   const productExist = await Product.findOne({ name: payload.name });
@@ -74,6 +70,6 @@ export {
   createProductIntoDB,
   getAllProductsFromDB,
   getSingleProductFromDB,
-  ProductUpdateIntoDB,
   ProductDeleteFromDB,
+  ProductUpdateIntoDB,
 };
