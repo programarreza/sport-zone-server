@@ -30,6 +30,11 @@ productRoutes.get("/", getALlProducts);
 productRoutes.get("/:id", getSingleProductById);
 productRoutes.patch(
   "/:id",
+  multerUpload.single("image"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next();
+  },
   validateRequest(updateProductValidationSchema),
   productUpdate
 );

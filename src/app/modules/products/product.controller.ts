@@ -48,7 +48,10 @@ const getSingleProductById = catchAsync(async (req, res) => {
 
 const productUpdate = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await ProductUpdateIntoDB(id, req.body);
+  const result = await ProductUpdateIntoDB(id, {
+    ...req.body,
+    image: req.file?.path,
+  });
 
   sendResponse(res, {
     success: true,
@@ -75,5 +78,6 @@ export {
   getALlProducts,
   getSingleProductById,
   productDelete,
-  productUpdate,
+  productUpdate
 };
+
